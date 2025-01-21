@@ -13,6 +13,11 @@ struct Node {
     string data;
     Node *left;
     Node *right;
+
+    // todo: may remove
+    // Constructor to make it easier to initialize Node
+    Node(const string &data, Node *left = nullptr, Node *right = nullptr)
+            : data(data), left(left), right(right) {}
 };
 
 class BinTree {
@@ -26,7 +31,7 @@ public:
     BinTree();
     BinTree(const BinTree &);
 
-    // Desctructor
+    // Destructor
     ~BinTree();
 
     // required PUBLIC methods
@@ -60,6 +65,13 @@ private:
     Node *root; // Points to the root of the BST
 
     // helper methods
+    // 1.
+    void makeEmpty(Node *&);
+    Node *copyTree(Node *);
+
+    //2.
+    bool compareTrees(Node *node1, Node *node2) const;
+
     bool insertHelper(Node *&, const string &);
     bool retrieveHelper(Node *, const string &, Node *&) const;
 
@@ -72,8 +84,6 @@ private:
     int bstreeToArrayHelper(Node *, string[], int);
     Node *arrayToBSTreeHelper(string[], int, int);
 
-    void makeEmpty(Node *&);
-    Node *copyTree(Node *);
 
 
 };
