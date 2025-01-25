@@ -56,7 +56,9 @@ Node *BinTree::copyTree(Node *node) {
 
 // a. The assignment operator (=) to assign one tree to another.
 BinTree &BinTree::operator=(const BinTree &rhs) {
+    // first checks for self-assignment
     if (this != &rhs) {
+        // empty current tree
         makeEmpty(root);
         root = copyTree(rhs.root);
     }
@@ -66,6 +68,7 @@ BinTree &BinTree::operator=(const BinTree &rhs) {
 // b. The equality and inequality operator (==)
 // Define two trees to be equal if they have the same data and structure.
 bool BinTree::operator==(const BinTree &rhs) const {
+    // helper method to compare structure and data
     return compareTrees(root, rhs.root);
 }
 
@@ -98,24 +101,55 @@ bool BinTree::compareTrees(Node *node1, Node *node2) const {
 
 // (a) overload << to display the tree using inorder traversal (friend method)
 ostream &operator<<(ostream &output, const BinTree &tree) {
-    tree.inorderTravesal(output, tree.root);
+    // allow easy printing of tree in-order
+    tree.inorderTraversal(output, tree.root);
     return output;
 }
 
 // (b) displaySideways to display the tree sideways, as if it has been
 // rotated counterclockwise by 90 degree.
 void BinTree::displaySideways() const {
+    // rightmost nodes printed first, L to R
     displaySidewaysHelper(root, 0);
 }
 
 // (c) displayTree  to display the tree traditionally, with prefix of Root, L---, R---
 void BinTree::displayTree() const {
-    return displayTreeHelper(root, "Root");
+    displayTreeHelper(root, "Root");
 }
 
 // 3. HELPER
-void BinTree::inorderTraversal() {
+void BinTree::inorderTraversal(ostream &output, Node *node) const{
+    // L to root to R
+    if (node != nullptr) {
+        inorderTraversal(output, node->left);
+        output << node->data << " ";
+        inorderTraversal(output, node->right);
+    }
+}
 
+void BinTree::displaySidewaysHelper(Node *node, int level) const {
+    // first printing the right subtree
+    if (node != nullptr) {
+        displaySidewaysHelper(node->right, level + 1);
+    }
+
+    for (int i = 0; i < level; i++) {
+        cout << "     ";
+    }
+    cout << node->data << endl;
+    // then printing left subtree
+    displaySidewaysHelper(node->left, level + 1);
+}
+
+void BinTree::displayTreeHelper(Node *node, string prefix) const {
+    // each node is prefixed with either L-- or R-- depending on
+    // whether it's the left or right child.
+    if (node != nullptr) {
+        cout << prefix <<  " " << node->data << endl;
+        displayTreeHelper(node->left, "L--" + prefix);
+        displayTreeHelper(node->right, "R--" + prefix);
+    }
 }
 
 
@@ -135,6 +169,7 @@ bool BinTree::isEmpty() const {
 If the object is found, it will point to the actual object in the tree.
  */
 bool BinTree::retrieve(const string &value,Node *&result) const {
+    // return a pointer to the node if found.
     return retrieveHelper(root, value, result);
 }
 
@@ -171,6 +206,9 @@ Fill array of data by in-order traversal while emptying the tree
  */
 
 void BinTree::bstreeToArray(string arr[]) {
+    // TLDR:  converts the binary search tree
+    // into an array of strings using inorder traversal,
+    // and leaves the tree empty.
     int index = 0;
     index = bstreeToArrayHelper(root, arr, index);
     makeEmpty(root);
@@ -185,6 +223,9 @@ builds a balanced BinTree from a sorted array of node data
  After the call to arrayToBSTree, the array should be filled with NULLs
  */
 void BinTree::arrayToBSTree(string arr[]) {
+    // TLDR:  root node is placed at the middle of the array,
+    // and the left and right subtrees are recursively built
+    // from the left and right halves of the array.
     root = arrayToBSTreeHelper(arr, 0, ARRAYSIZE - 1);
     // clear array when the tree is build
     for (int i = 0; i < ARRAYSIZE; ++i) {
@@ -197,6 +238,9 @@ void BinTree::arrayToBSTree(string arr[]) {
 
 // Note: duplicate values aren't allowed
 bool BinTree::insertHelper(Node *&node, const string &value) {
+    // Initially starts at the root
+    //  helper function recursively finds the appropriate spot
+    //  in the tree and inserts the new node.
     if (!node) {
         node = new Node(value, nullptr, nullptr);
         return true;
@@ -222,16 +266,63 @@ bool BinTree::retrieveHelper(Node *node, const string &value, Node *&result) con
     return retrieveHelper(node->right, value, result);
 }
 
+
+// NOTE: Follow special instructions: height starts at leaf node at 1
+// height of a non-leaf node is the maximum height of its children plus 1.
+
 int BinTree::getHeightHelper(Node *node, const string &value) const {
-    if (!node) return 0;
+    if (node == nullptr) return 0;
+
+    // node containing the value, return height 1 (leaf node)
     if (node->data == value) {
         return nodeHeight(node);
     }
+
+    // recursive searching
     int leftHeight = getHeightHelper(node->left, value);
     int rightHeight = getHeightHelper(node->right, value);
-    return max(leftHeight, rightHeight);
+
+    // value was found in either subtree, return the height (longest path upwards)
+    if (leftHeight > 0 || rightHeight < 0) {
+        return std::max(leftHeight, rightHeight) + 1;
+    }
+
+    //return max(leftHeight, rightHeight);
+    return 0;
 }
 
-int BinTree::displayTreeHelper(Node *node, string prefix) const {
-    // todo
+// todo: work on other helpers for part 4
+int BinTree::bstreeToArrayHelper(Node *node, string arr[], int index) {
+    if (node == nullptr) {
+        return index;
+    }
+
+    // traverse the left st
+    index = bstreeToArrayHelper(node->left, arr, index);
+
+    // add node data to array
+    arr[index++] = node->data;
+
+    // traverse the right st
+    index = bstreeToArrayHelper(node->left, arr, index);
+
+    return index;
+}
+
+Node *BinTree::arrayToBSTreeHelper(string arr[], int high, int low) {
+    if (low > high) {
+        return nullptr;
+    }
+
+    // find middle value
+    int mid = (low + high) / 2;
+
+    // create new node w/ middle element
+    Node *newNode = new Node(arr[mid]);
+
+    // left and right st
+    newNode->left = arrayToBSTreeHelper(arr, low, mid - 1);
+    newNode->right = arrayToBSTreeHelper(arr, low + 1, mid);
+
+    return newNode;
 }

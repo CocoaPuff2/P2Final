@@ -72,14 +72,18 @@ private:
     //2.
     bool compareTrees(Node *node1, Node *node2) const;
 
+    // 3.
+    void inorderTraversal(ostream &output, Node *) const;
+    void displayTreeHelper(Node *, string) const;
+    void displaySidewaysHelper(Node *, int) const;
+
     bool insertHelper(Node *&, const string &);
     bool retrieveHelper(Node *, const string &, Node *&) const;
 
     int getHeightHelper(Node *, const string &) const;
     int nodeHeight(Node *) const; // Helper to compute height from a given node
 
-    void displayTreeHelper(Node *, string) const;
-    void displaySidewaysHelper(Node *, int) const;
+
 
     int bstreeToArrayHelper(Node *, string[], int);
     Node *arrayToBSTreeHelper(string[], int, int);
