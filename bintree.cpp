@@ -27,16 +27,6 @@ BinTree::~BinTree() {
 }
 
 // 1. PRIVATE HELPERS
-void BinTree::makeEmpty(Node *&node) {
-    // recursively delete nodes
-    if (node != nullptr) {
-        makeEmpty(node->left);
-        makeEmpty(node->right);
-        delete node;
-        node = nullptr;
-    }
-}
-
 Node *BinTree::copyTree(Node *node) {
     // recursively copy nodes
     if (node == nullptr) {
@@ -48,6 +38,16 @@ Node *BinTree::copyTree(Node *node) {
     return newNode;
 }
 
+void BinTree::makeEmpty(Node *&node) {
+    // recursively delete nodes
+    if (node != nullptr) {
+        makeEmpty(node->left);
+        makeEmpty(node->right);
+        delete node;
+        node = nullptr;
+    }
+}
+
 
 /*
      2. ASSIGNMENT COMPARE OPERATORS
@@ -57,7 +57,7 @@ Node *BinTree::copyTree(Node *node) {
 // a. The assignment operator (=) to assign one tree to another.
 BinTree &BinTree::operator=(const BinTree &rhs) {
     // first checks for self-assignment
-    if (this != &rhs) {
+    if (this != &rhs) { // tree does not copy itself
         // empty current tree
         makeEmpty(root);
         root = copyTree(rhs.root);
@@ -109,7 +109,7 @@ ostream &operator<<(ostream &output, const BinTree &tree) {
 // (b) displaySideways to display the tree sideways, as if it has been
 // rotated counterclockwise by 90 degree.
 void BinTree::displaySideways() const {
-    // rightmost nodes printed first, L to R
+    // rightmost nodes printed first, root, Left
     displaySidewaysHelper(root, 0);
 }
 
@@ -129,16 +129,18 @@ void BinTree::inorderTraversal(ostream &output, Node *node) const{
 }
 
 void BinTree::displaySidewaysHelper(Node *node, int level) const {
-    // first printing the right subtree
-    if (node != nullptr) {
-        displaySidewaysHelper(node->right, level + 1);
+    // first print  right subtree
+    if (node == nullptr) {
+        return;
     }
+
+    displaySidewaysHelper(node->right, level + 1);
 
     for (int i = 0; i < level; i++) {
         cout << "     ";
     }
     cout << node->data << endl;
-    // then printing left subtree
+    // then print left subtree
     displaySidewaysHelper(node->left, level + 1);
 }
 

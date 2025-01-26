@@ -49,14 +49,14 @@ cmake_ninja_workdir = /Users/Qasim/css343/P2Final/cmake-build-debug/
 
 build cmake_object_order_depends_target_my_executable: phony || CMakeFiles/my_executable.dir
 
-build CMakeFiles/my_executable.dir/bintree.cpp.o: CXX_COMPILER__my_executable_unscanned_Debug /Users/Qasim/css343/P2Final/bintree.cpp || cmake_object_order_depends_target_my_executable
-  DEP_FILE = CMakeFiles/my_executable.dir/bintree.cpp.o.d
+build CMakeFiles/my_executable.dir/driver.cpp.o: CXX_COMPILER__my_executable_unscanned_Debug /Users/Qasim/css343/P2Final/driver.cpp || cmake_object_order_depends_target_my_executable
+  DEP_FILE = CMakeFiles/my_executable.dir/driver.cpp.o.d
   FLAGS = -Wall -DDEBUG -g -O0 -std=gnu++17 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk -mmacosx-version-min=12.7 -fcolor-diagnostics
   OBJECT_DIR = CMakeFiles/my_executable.dir
   OBJECT_FILE_DIR = CMakeFiles/my_executable.dir
 
-build CMakeFiles/my_executable.dir/main.cpp.o: CXX_COMPILER__my_executable_unscanned_Debug /Users/Qasim/css343/P2Final/main.cpp || cmake_object_order_depends_target_my_executable
-  DEP_FILE = CMakeFiles/my_executable.dir/main.cpp.o.d
+build CMakeFiles/my_executable.dir/bintree.cpp.o: CXX_COMPILER__my_executable_unscanned_Debug /Users/Qasim/css343/P2Final/bintree.cpp || cmake_object_order_depends_target_my_executable
+  DEP_FILE = CMakeFiles/my_executable.dir/bintree.cpp.o.d
   FLAGS = -Wall -DDEBUG -g -O0 -std=gnu++17 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk -mmacosx-version-min=12.7 -fcolor-diagnostics
   OBJECT_DIR = CMakeFiles/my_executable.dir
   OBJECT_FILE_DIR = CMakeFiles/my_executable.dir
@@ -69,7 +69,7 @@ build CMakeFiles/my_executable.dir/main.cpp.o: CXX_COMPILER__my_executable_unsca
 #############################################
 # Link the executable my_executable
 
-build my_executable: CXX_EXECUTABLE_LINKER__my_executable_Debug CMakeFiles/my_executable.dir/bintree.cpp.o CMakeFiles/my_executable.dir/main.cpp.o
+build my_executable: CXX_EXECUTABLE_LINKER__my_executable_Debug CMakeFiles/my_executable.dir/driver.cpp.o CMakeFiles/my_executable.dir/bintree.cpp.o
   FLAGS = -Wall -DDEBUG -g -O0 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk -mmacosx-version-min=12.7
   OBJECT_DIR = CMakeFiles/my_executable.dir
   POST_BUILD = :

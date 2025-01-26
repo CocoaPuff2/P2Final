@@ -65,25 +65,24 @@ private:
     Node *root; // Points to the root of the BST
 
     // helper methods
-    // 1.
+    // Part 1.
     void makeEmpty(Node *&);
     Node *copyTree(Node *);
 
-    //2.
+    // Part 2.
     bool compareTrees(Node *node1, Node *node2) const;
 
-    // 3.
+    // Part 3.
     void inorderTraversal(ostream &output, Node *) const;
     void displayTreeHelper(Node *, string) const;
     void displaySidewaysHelper(Node *, int) const;
 
+    // Part 4.
     bool insertHelper(Node *&, const string &);
     bool retrieveHelper(Node *, const string &, Node *&) const;
 
     int getHeightHelper(Node *, const string &) const;
     int nodeHeight(Node *) const; // Helper to compute height from a given node
-
-
 
     int bstreeToArrayHelper(Node *, string[], int);
     Node *arrayToBSTreeHelper(string[], int, int);
