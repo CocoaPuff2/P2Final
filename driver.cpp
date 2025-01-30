@@ -42,11 +42,12 @@ void printArray(string a[]) {
     cout << endl;
 }
 
+
 int main() {
 
     // Test the fileread method
 
-    ifstream infile("inputdata.txt");
+   ifstream infile("inputdata.txt");
     if (!infile) {
         cout << "File could not be opened." << endl;
         return 1;
@@ -123,4 +124,6 @@ int main() {
     }
 
     return 0;
+
 }
+
