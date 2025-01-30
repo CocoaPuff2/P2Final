@@ -74,7 +74,7 @@ private:
 
     // Part 3.
     void inorderTraversal(ostream &output, Node *) const;
-    void displayTreeHelper(Node *, string) const;
+    void displayTreeHelper(Node *, const string&, int) const;
     void displaySidewaysHelper(Node *, int) const;
 
     // Part 4.
