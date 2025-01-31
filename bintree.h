@@ -82,7 +82,6 @@ private:
 
     // conversion helper methods
     bool isNumeric(const string& str) const;  // is string is a valid number
-    // int stringToInt(const string& str);    // convert string to integer
 
     int getHeightHelper(Node *, const string &) const;
     int nodeHeight(Node *) const; // Helper to compute height from a given node
