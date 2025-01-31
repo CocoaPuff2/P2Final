@@ -6,7 +6,7 @@
 // Windows and unix store files slightly differently. Windows does not
 // always store an end-of-line char on the last line, where unix does.
 // On windows, always make sure the cursor is on the line after
-// the last line of data so it acts like unix/linux.
+// the last line of data so it acts like unix/linux..
 
 #include "bintree.h"
 #include <fstream>
