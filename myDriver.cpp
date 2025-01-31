@@ -1,15 +1,12 @@
+
 #include "bintree.h"
+#include <fstream>
 #include <iostream>
 #include <cctype>
 
 using namespace std;
-/*
 
-void buildTree(BinTree &T, const string values[], int size) {
-    for (int i = 0; i < size; ++i) {
-        bool success = T.insert(values[i]);
-    }
-}
+/*
 
 void printArray(string a[]) {
     for (int i = 0; i < ARRAYSIZE; i++) {
@@ -19,51 +16,77 @@ void printArray(string a[]) {
     cout << endl;
 }
 
+
 int main() {
-    // Input values to be inserted directly into the tree
-    string values1[] = {"18", "3", "37", "11", "25", "21", "40", "8", "13", "1", "42", "15"};
-    string values2[] = {"iii", "not", "tttt", "eee", "r", "not", "and", "jj", "r", "eee", "pp", "r", "sssss", "eee", "not", "tttt", "ooo", "ff", "m", "m", "y", "z"};
-    string values3[] = {"b", "a", "c", "b", "a", "c"};
-    string values4[] = {"c", "b", "a"};
+    BinTree tree;
+    string values[] = {"10", "5", "15", "3", "7", "12", "18", "1", "4", "6", "8", "11", "13", "16", "20"};
 
-    // Test the manual input method for each set of values
-    BinTree filetree;
+    cout << "Test insert method: " << endl;
+    for (const string &val : values) {
+        tree.insert(val);
+    }
 
-    // First set of values
-    cout << "Building tree with first set of values: " << endl;
-    buildTree(filetree, values1, sizeof(values1)/sizeof(values1[0]));
-    cout << "Sideway print: " << endl;
-    filetree.displaySideways();
-    cout << "Display tree: " << endl;
-    filetree.displayTree();
+    cout << "Test display sideways method: " << endl;
+    tree.displaySideways();
 
-    // Second set of values
-    cout << "Building tree with second set of values: " << endl;
-    BinTree filetree2;
-    buildTree(filetree2, values2, sizeof(values2)/sizeof(values2[0]));
-    cout << "Sideway print: " << endl;
-    filetree2.displaySideways();
-    cout << "Display tree: " << endl;
-    filetree2.displayTree();
+    cout << "Test display of tree structure: " << endl;
+    tree.displayTree();
 
-    // Third set of values
-    cout << "Building tree with third set of values: " << endl;
-    BinTree filetree3;
-    buildTree(filetree3, values3, sizeof(values3)/sizeof(values3[0]));
-    cout << "Sideway print: " << endl;
-    filetree3.displaySideways();
-    cout << "Display tree: " << endl;
-    filetree3.displayTree();
+    cout << "Test retrievee: " << endl;
+    string target = "7";
+    Node *addr;
+    bool found = tree.retrieve(target, addr);
+    cout << "Retrieve " << tree << (found ? ": found" : ": not found")
+         << endl;
+    if (found)
+        cout << "Node address = " << addr << endl;
 
-    // Fourth set of values
-    cout << "Building tree with fourth set of values: " << endl;
-    BinTree filetree4;
-    buildTree(filetree4, values4, sizeof(values4)/sizeof(values4[0]));
-    cout << "Sideway print: " << endl;
-    filetree4.displaySideways();
-    cout << "Display tree: " << endl;
-    filetree4.displayTree();
+    cout << "Height of node " << target << " is " << tree.getHeight(target) << endl;
+
+    cout << "Test isEmpty(): " << endl;
+    cout << (tree.isEmpty() ? "Tree is empty" : "Tree is NOT empty") << endl;
+
+    BinTree copytree(tree);
+    cout << "Copy Tree: " << copytree << endl;
+
+    BinTree T = tree;
+    cout << "Assign Tree: " << T << endl;
+    cout << "Are they the same?  " << ((copytree == T) ? " yes " : " no") << endl;
+    cout << "Are they different?  " << ((copytree != T) ? " yes " : " no") << endl;
+
+    cout << "BST to Array" << endl;
+    string ndarray[ARRAYSIZE];
+    BinTree original (tree);
+    tree.bstreeToArray(ndarray);
+    printArray(ndarray);
+
+    cout << "Array to BST: should balance the tree" << endl;
+    tree.arrayToBSTree(ndarray);
+    tree.displaySideways();
+    tree.displayTree();
+
+    cout<<"Compare the original tree and recovered tree"<<endl;
+    cout << "Are they the same?  " << ((original == tree) ? " yes " : " no")
+         << endl;
+
+    cout << "Are they different?  " << ((original != tree) ? " yes " : " no")
+         << endl;
+
+    tree.arrayToBSTree(ndarray);
+    tree.displaySideways();
+    tree.displayTree();
+
+    cout<<"Compare the original tree and recovered tree"<<endl;
+
+    cout << "Are they same?  " << ((original == tree) ? " yes " : " no")
+         << endl;
+
+    cout << "Are they different?  " << ((original != tree) ? " yes " : " no")
+         << endl;
+
 
     return 0;
+
 }
-*/
+ */
+
