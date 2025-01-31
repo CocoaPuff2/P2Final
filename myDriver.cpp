@@ -6,7 +6,6 @@
 
 using namespace std;
 
-/*
 
 void printArray(string a[]) {
     for (int i = 0; i < ARRAYSIZE; i++) {
@@ -88,5 +87,5 @@ int main() {
     return 0;
 
 }
- */
+
 
