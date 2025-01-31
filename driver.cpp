@@ -48,7 +48,7 @@ int main() {
 
     // Test the fileread method
 
-   ifstream infile("inputdata.txt");
+   ifstream infile("../inputdata.txt");
     if (!infile) {
         cout << "File could not be opened." << endl;
         return 1;
