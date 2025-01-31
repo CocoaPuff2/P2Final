@@ -1,5 +1,6 @@
 #include "bintree.h"
 #include <iomanip>
+#include <algorithm>
 using namespace std;
 /*
  * ORDER:
