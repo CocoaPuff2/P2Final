@@ -43,6 +43,8 @@ int main() {
 
     cout << "Height of node " << testnode << " is " << filetree.getHeight(testnode) << endl;
 
+    cout << "Is tree empty? " << (filetree.isEmpty() ? "Yes" : "No") << endl;
+
     // Copy constructor
     BinTree copytree(filetree);
     cout << "Copy Tree: " << copytree << endl;
