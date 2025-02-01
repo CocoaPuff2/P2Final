@@ -3,6 +3,14 @@
 
 using namespace std;
 
+void buildTree(BinTree &T) {
+    // Manually input data instead of reading from a file
+    string values[] = {"10", "5", "15", "3", "7", "12", "18", "1", "4", "6", "8", "11", "13", "16", "20"};
+    for (const string &val : values) {
+        T.insert(val);
+    }
+}
+
 void printArray(string a[]) {
     for (int i = 0; i < ARRAYSIZE; i++) {
         if (!a[i].empty())
@@ -12,36 +20,28 @@ void printArray(string a[]) {
 }
 
 int main() {
+    cout << "Building tree with manual input" << endl;
     BinTree filetree;
-    string values[] = {"10", "5", "15", "3", "7", "12", "18", "1", "4", "6", "8", "11", "13", "16", "20"};
+    buildTree(filetree);
 
-    cout << "Test insert method: " << endl;
-    for (const string &val : values) {
-        filetree.insert(val);
-    }
-
-    // Testing sideway print
-    cout << "Test display sideways method: " << endl;
+    cout << "Sideway print: " << endl;
     filetree.displaySideways();
 
-    cout << "Test display of tree structure: " << endl;
+    cout << "Display tree: " << endl;
     filetree.displayTree();
 
     cout << "Inorder: " << filetree << endl;
 
     // Test getHeight and retrieve
-    cout << "Test retrieve and getHeight methods" << endl;
-    string testnode = "7";
+    cout << "Test retrieve and getHeight" << endl;
+    string testnode = "18";
     Node *addr = nullptr;
     bool found = filetree.retrieve(testnode, addr);
     cout << "Retrieve " << testnode << (found ? ": found" : ": not found") << endl;
     if (found)
         cout << "Node address = " << addr << endl;
 
-    cout << "Height of the node " << testnode << " is " << filetree.getHeight(testnode) << endl;
-
-    cout << "Test isEmpty(): " << endl;
-    cout << (filetree.isEmpty() ? "Tree is empty" : "Tree is NOT empty") << endl;
+    cout << "Height of node " << testnode << " is " << filetree.getHeight(testnode) << endl;
 
     // Copy constructor
     BinTree copytree(filetree);
@@ -55,7 +55,7 @@ int main() {
     cout << "Are they different?  " << ((copytree != T) ? " yes " : " no") << endl;
 
     cout << "BST to Array" << endl;
-    string ndarray[ARRAYSIZE] = {}; // Ensure it's initialized
+    string ndarray[ARRAYSIZE] = {};
 
     BinTree original(filetree);
     filetree.bstreeToArray(ndarray);
@@ -69,11 +69,6 @@ int main() {
     cout << "Compare the original tree and recovered tree" << endl;
     cout << "Are they same?  " << ((original == filetree) ? " yes " : " no") << endl;
     cout << "Are they different?  " << ((original != filetree) ? " yes " : " no") << endl;
-
-    // Clear the array to avoid potential memory issues
-    for (int i = 0; i < ARRAYSIZE; i++) {
-        ndarray[i].clear();
-    }
 
     return 0;
 }
