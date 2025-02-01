@@ -20,7 +20,7 @@ void printArray(string a[]) {
 }
 
 int main() {
-    cout << "Building tree with manual input" << endl;
+    cout << "Building tree with hardcoded values" << endl;
     BinTree filetree;
     buildTree(filetree);
 
@@ -43,6 +43,7 @@ int main() {
 
     cout << "Height of node " << testnode << " is " << filetree.getHeight(testnode) << endl;
 
+    // Test isEmpty()
     cout << "Is tree empty? " << (filetree.isEmpty() ? "Yes" : "No") << endl;
 
     // Copy constructor
@@ -53,9 +54,11 @@ int main() {
     BinTree T = filetree;
     cout << "Assign Tree: " << T << endl;
 
+    // inequalty and equality checks
     cout << "Are they same?  " << ((copytree == T) ? " yes " : " no") << endl;
     cout << "Are they different?  " << ((copytree != T) ? " yes " : " no") << endl;
 
+    // bst to array
     cout << "BST to Array" << endl;
     string ndarray[ARRAYSIZE] = {};
 
@@ -63,6 +66,7 @@ int main() {
     filetree.bstreeToArray(ndarray);
     printArray(ndarray);
 
+    // array to bst
     cout << "Array to BST: should balance the tree" << endl;
     filetree.arrayToBSTree(ndarray);
     filetree.displaySideways();
@@ -71,6 +75,11 @@ int main() {
     cout << "Compare the original tree and recovered tree" << endl;
     cout << "Are they same?  " << ((original == filetree) ? " yes " : " no") << endl;
     cout << "Are they different?  " << ((original != filetree) ? " yes " : " no") << endl;
+
+
+    // test destructor (no mem leaks should be possible)
+    // Destructor will be called automatically when filetree, copyTree, and assignedTree go out of scope.
+    cout << "\nExiting the program, the destructor will clean up memory." << endl;
 
     return 0;
 }
