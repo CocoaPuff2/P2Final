@@ -16,73 +16,77 @@ void printArray(string a[]) {
 }
 
 
+
 int main() {
-    BinTree tree;
-    string values[] = {"10", "5", "15", "3", "7", "12", "18", "1", "4", "6", "8", "11", "13", "16", "20"};
+        BinTree filetree;
+        string values[] = {"10", "5", "15", "3", "7", "12", "18", "1", "4", "6", "8", "11", "13", "16", "20"};
 
-    cout << "Test insert method: " << endl;
-    for (const string &val : values) {
-        tree.insert(val);
-    }
+        cout << "Test insert method: " << endl;
+        for (const string &val : values) {
+        filetree.insert(val);
+         }
 
-    cout << "Test display sideways method: " << endl;
-    tree.displaySideways();
+        // Testing sideway print
+        cout << "Test display sideways method: " << endl;
+        filetree.displaySideways();
 
-    cout << "Test display of tree structure: " << endl;
-    tree.displayTree();
+        cout << "Test display of tree structure: " << endl;
+        filetree.displayTree();
 
-    cout << "Test retrievee: " << endl;
-    string target = "7";
-    Node *addr;
-    bool found = tree.retrieve(target, addr);
-    cout << "Retrieve " << tree << (found ? ": found" : ": not found")
-         << endl;
-    if (found)
-        cout << "Node address = " << addr << endl;
+        cout << "Inorder: " << filetree << endl;
+        // test getHeight and retrieve (You can change the data to test)
+        cout << "Test retrieve and getHeight methods" << endl;
+        string testnode = "7";
+        Node *addr;
+        bool found = filetree.retrieve(testnode, addr);
+        cout << "Retrieve " << testnode << (found ? ": found" : ": not found")
+             << endl;
+        if (found)
+            cout << "Node address = " << addr << endl;
 
-    cout << "Height of node " << target << " is " << tree.getHeight(target) << endl;
+        cout << "Height of the node " << testnode << " is "
+             << filetree.getHeight(testnode) << endl;
 
-    cout << "Test isEmpty(): " << endl;
-    cout << (tree.isEmpty() ? "Tree is empty" : "Tree is NOT empty") << endl;
+        cout << "Test isEmpty(): " << endl;
+        cout << (filetree.isEmpty() ? "Tree is empty" : "Tree is NOT empty") << endl;
 
-    BinTree copytree(tree);
-    cout << "Copy Tree: " << copytree << endl;
 
-    BinTree T = tree;
-    cout << "Assign Tree: " << T << endl;
-    cout << "Are they the same?  " << ((copytree == T) ? " yes " : " no") << endl;
-    cout << "Are they different?  " << ((copytree != T) ? " yes " : " no") << endl;
+    BinTree copytree(filetree);
+        cout << "Copy Tree: " << copytree << endl;
 
-    cout << "BST to Array" << endl;
-    string ndarray[ARRAYSIZE];
-    BinTree original (tree);
-    tree.bstreeToArray(ndarray);
-    printArray(ndarray);
+        BinTree T = filetree;
 
-    cout << "Array to BST: should balance the tree" << endl;
-    tree.arrayToBSTree(ndarray);
-    tree.displaySideways();
-    tree.displayTree();
+        cout << "Assign Tree: " << T << endl;
 
-    cout<<"Compare the original tree and recovered tree"<<endl;
-    cout << "Are they the same?  " << ((original == tree) ? " yes " : " no")
-         << endl;
+        cout << "Are they same?  " << ((copytree == T) ? " yes " : " no") << endl;
 
-    cout << "Are they different?  " << ((original != tree) ? " yes " : " no")
-         << endl;
+        cout << "Are they different?  " << ((copytree != T) ? " yes " : " no")
+             << endl;
 
-    tree.arrayToBSTree(ndarray);
-    tree.displaySideways();
-    tree.displayTree();
 
-    cout<<"Compare the original tree and recovered tree"<<endl;
+        cout << "BST to Array" << endl;
 
-    cout << "Are they same?  " << ((original == tree) ? " yes " : " no")
-         << endl;
+        string ndarray[ARRAYSIZE];
 
-    cout << "Are they different?  " << ((original != tree) ? " yes " : " no")
-         << endl;
+        BinTree original (filetree);
 
+        filetree.bstreeToArray(ndarray);
+        printArray(ndarray);
+
+
+        cout << "Array to BST: should balance the tree" << endl;
+
+        filetree.arrayToBSTree(ndarray);
+        filetree.displaySideways();
+        filetree.displayTree();
+
+        cout<<"Compare the original tree and recovered tree"<<endl;
+
+        cout << "Are they same?  " << ((original == filetree) ? " yes " : " no")
+             << endl;
+
+        cout << "Are they different?  " << ((original != filetree) ? " yes " : " no")
+             << endl;
 
     return 0;
 
